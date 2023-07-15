@@ -20,10 +20,10 @@
   home.packages = with pkgs; [
     btop
     emacs29
-    ripgrep
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # hello
+    xmobar
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -74,17 +74,10 @@
     enable = true;
     userName = "Kyle Ackerman";
     userEmail = "108965613+kack1@users.noreply.github.com";
-    extraConfig.init = {
-      defaultBranch = "main"; 
-    };
-};
-  programs.xmobar = {
-    enable = true;
-    extraConfig = builtins.readFile /home/kyle/.dotfiles/.xmobarrc;
 };
   xsession.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
     config = /home/kyle/.dotfiles/xmonad.hs;
-};
+};enableContribAndExtras = true;
 }
