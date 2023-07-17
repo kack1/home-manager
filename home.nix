@@ -21,6 +21,9 @@
     btop
     emacs29
     ripgrep
+    python311Packages.python-lsp-server
+    python311Packages.python-lsp-black
+    pipenv
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # hello
@@ -63,8 +66,13 @@
   #  /etc/profiles/per-user/kyle/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = {
-     EDITOR = "vim";
+  home = {
+    sessionVariables = {
+      EDITOR = "vim";
+    };
+    sessionPath = [
+      "~/.config/emacs/bin/"
+    ];
   };
 
   # Let Home Manager install and manage itself.
@@ -78,6 +86,9 @@
       defaultBranch = "main"; 
     };
 };
+  programs.bash = {
+    enable = true;
+  };
   programs.xmobar = {
     enable = true;
     extraConfig = builtins.readFile /home/kyle/.dotfiles/.xmobarrc;
@@ -87,4 +98,24 @@
     enableContribAndExtras = true;
     config = /home/kyle/.dotfiles/xmonad.hs;
 };
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      title = "Alacritty";
+      window = {
+        padding = {
+	  x = 10;
+	  y = 10;
+        };
+        opacity = 1;
+      };
+    };
+};
+  services.picom = {
+    enable = true;
+    fade = false;
+    opacityRules = [
+	"90:class_g = 'Alacritty'"
+    ];
+  };
 }
