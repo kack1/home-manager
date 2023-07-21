@@ -19,7 +19,6 @@
   # environment.
   home.packages = with pkgs; [
     btop
-    emacs29
     ripgrep
     python311Packages.python-lsp-server
     python311Packages.python-lsp-black
@@ -114,8 +113,15 @@
   services.picom = {
     enable = true;
     fade = false;
+    fadeDelta = 1;
     opacityRules = [
 	"90:class_g = 'Alacritty'"
+	"90:class_g = 'Emacs'"
     ];
+  };
+  programs.emacs ={
+    enable = true;
+    package = pkgs.emacs29;
+    #extraConfig = builtins.readFile /home/kyle/.dotfiles/init.el;
   };
 }
