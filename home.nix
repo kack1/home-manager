@@ -18,27 +18,23 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    got
+    black
+    firefox
     btop
     ripgrep
+    #Elpy
+    python311Full
     python311Packages.python-lsp-server
     python311Packages.python-lsp-black
     pipenv
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    pass
+    keepassxc
+    rtags
+    texlive.combined.scheme-full 
+    aspell
+    aspellDicts.en
+    aspellDicts.en-computers
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -69,9 +65,6 @@
     sessionVariables = {
       EDITOR = "vim";
     };
-    sessionPath = [
-      "~/.config/emacs/bin/"
-    ];
   };
 
   # Let Home Manager install and manage itself.
@@ -119,9 +112,27 @@
 	"90:class_g = 'Emacs'"
     ];
   };
+  # EMACS!
   programs.emacs ={
     enable = true;
     package = pkgs.emacs29;
     #extraConfig = builtins.readFile /home/kyle/.dotfiles/init.el;
+  };
+  services.emacs = {
+    enable = true;
+ };
+
+  programs.gpg = {
+  enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+  };
+  programs.direnv = {
+
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+
   };
 }
